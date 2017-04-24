@@ -1,0 +1,69 @@
+@charset"utf-8";
+
+body,div,p,ul{
+    margin: 0;
+    padding: 0;
+}
+
+#all{
+  width : 500px;
+  height : 700px;
+  background-color :#86AF49;
+  margin : 0 auto;
+
+}
+
+header {
+  width : 500px;
+  height : 60px;
+  background-color : #90A7D0;
+}
+
+#name{
+    float: left;
+    margin : 20px 70px 0 30px;
+    font-size : 40px;
+    border : dotted #EF5C6E;
+}
+
+#level{
+    float: left;
+    margin: 20px 10px 10px 0;
+    font-size : 40px;
+    border : dotted #EF5C6E;
+}
+
+#status{
+    width : 300px;
+    margin : 0 0 100px 150px;
+    padding-left : 20px;
+    clear : left;
+    font-size : 25px;
+    border : solid #EF5C6E;
+
+}
+
+#charaimag{
+    width: 256px;
+    margin : 0 0 0 200px;
+
+}
+
+#plusmoney{
+    float: left;
+}
+
+#plusex{
+    float: left;
+}
+
+#pluspow{
+    float: left;
+
+}
+
+#footer{
+    clear: left;
+    margin-top: 50px;
+    text-align : center;
+}
