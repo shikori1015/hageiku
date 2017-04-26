@@ -6,46 +6,57 @@ body,div,p,ul{
 }
 
 #all{
-  width : 500px;
-  height : 700px;
-  background-color :#86AF49;
+  width : 850px;
+  height : 600px;
   margin : 0 auto;
 
 }
 
 header {
-  width : 500px;
-  height : 60px;
-  background-color : #90A7D0;
+  width : 850px;
+  height : 20px;
+  padding : 0 0 10px 0;
+  background-color : #83B14F;
+}
+
+#main {
+  width : 850px;
+  height : 540px;
+  background-color : #ABBDB1;
+  margin : 10px 0 0 0;
+
 }
 
 #name{
     float: left;
-    margin : 20px 70px 0 30px;
+    margin : 10px 10px 0 20px;
     font-size : 40px;
     border : dotted #EF5C6E;
 }
 
 #level{
     float: left;
-    margin: 20px 10px 10px 0;
+    width : 200px;
+    height : 60px;
+    margin : 10px 0 0 0;
     font-size : 40px;
     border : dotted #EF5C6E;
 }
 
 #status{
     width : 300px;
-    margin : 0 0 100px 150px;
     padding-left : 20px;
-    clear : left;
+    margin : 10px 0 0 100px;
+    float : left;
     font-size : 25px;
     border : solid #EF5C6E;
+    border-radius : 3px;
 
 }
 
 #charaimag{
-    width: 256px;
-    margin : 0 0 0 200px;
+    width: 200px;
+    margin : 25px 0 0 550px;
 
 }
 
@@ -63,7 +74,62 @@ header {
 }
 
 #footer{
-    clear: left;
-    margin-top: 50px;
+    clear: both;
     text-align : center;
+    height : 20px;
+    margin : 10px 0 0 0;
+    padding : 0 0 10px 0;
+    background-color : #83B14F;
+}
+
+ul,li   {
+    margin: 3px 20px 0 20px;
+    list-style: none;
+    float : left;
+}
+
+button.buttonton {
+    font-size: 1.6em;
+    font-weight: bold;
+    text-shadow: black 1.5px 1.5px 0px, black -1.5px 1.5px 0px,
+                 black 1.5px -1.5px 0px, black -1.5px -1.5px 0px;
+    padding: 10px 30px;
+    background-color: #F2DCDE;
+    color: #fff;
+    border : solid 3px #EF5C6E;
+    margin : 70px 0 0 90px;
+    border-radius : 5px;
+}
+
+button.buttonton:hover {
+    background-color: #CE8477;
+    color: #fff;
+}
+
+ul.navi {
+    display:table;
+    table-layout:fixed;
+    width:850px;
+    margin : 0 0 0 120px;
+    padding-bottom: 20px;
+}
+ul.navi li {
+    display:table-cell;
+    vertical-align:middle;
+    text-align:center;
+    float : left;
+    background-color: #CE5B78;
+    border-left:1px solid white;
+}
+ul.navi li:first-child {
+    border:none;
+}
+ul.navi li a {
+    display:block;
+    text-decoration:none;
+    color:white;
+}
+
+#copyright {
+  float : left;
 }
