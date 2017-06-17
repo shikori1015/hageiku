@@ -11,11 +11,16 @@
 #include <d3d9.h>
 #include <d3dx9.h>
 #include "Polygon.h"
-#include "main.h"
+
 
 //-------------------------------------------------------------------------------------------------------------------------------
 //　構造体定義
 //-------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 
 //-------------------------------------------------------------------------------------------------------------------------------
 //　マクロ定義
@@ -106,7 +111,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,					//int Mai
 	DWORD OldTime = 0;
 	DWORD NowTime = 0;
 
-	GetD3DDevice();
+
 	Init(hInstance, hWnd, TRUE);
 
 	//ゲームループの精度をよくする   ループ処理の終わった後にEndを書く
@@ -240,12 +245,26 @@ HRESULT Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	//デバイスの生成
 	//ディスプレイアダプタを表すためのデバイスを作成
 	//デバイスオブジェクトの生成
-	if (FAILED(g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd, D3DCREATE_HARDWARE_VERTEXPROCESSING, &d3dpp, &g_pD3DDevice)))
+	if (FAILED(g_pD3D->CreateDevice(
+		D3DADAPTER_DEFAULT,
+		D3DDEVTYPE_HAL,
+		hWnd,
+		D3DCREATE_HARDWARE_VERTEXPROCESSING,
+		&d3dpp,
+		&g_pD3DDevice)))
 	{
+		MessageBoxA(NULL, "3Dデバイスの作成制御に失敗しました", "メッセージ", MB_OK | MB_ICONHAND);
 		return FALSE;
 	}
 
-	InitPolygon();
+	g_pD3DDevice = g_pD3DDevice;
+
+
+	if (!InitPolygon())
+	{
+		MessageBox(hWnd, "ポリゴンの初期化ができませんでした", "エラー", MB_OK);
+		return false;
+	}
 
 	//レンダ―ステートの設定
 	//αブレンドを行う
@@ -265,11 +284,7 @@ HRESULT Init(HINSTANCE hInstance, HWND hWnd, BOOL bWindow)
 	g_pD3DDevice->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_WRAP);
 	g_pD3DDevice->SetSamplerState(0, D3DSAMP_ADDRESSV, D3DTADDRESS_WRAP);
 
-	if (!InitPolygon())
-	{
-		MessageBox(hWnd, "ポリゴンの初期化ができませんでした", "エラー",MB_OK);
-		return false;
-	}
+
 
 	return TRUE;
 }
@@ -296,10 +311,16 @@ void Update(void)
 }
 void Draw(void)
 {
-	g_pD3DDevice->Clear(0, NULL, (D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER), D3DCOLOR_RGBA(32, 64, 192, 255), 1.0f, 0);
+	g_pD3DDevice->Clear(
+		0,
+		NULL,
+		(D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER),
+		D3DCOLOR_RGBA(32 ,64, 192, 255),
+		1.0f,
+		0);
 
 	//D3Dによる描画の開始
-	if (SUCCEEDED(g_pD3DDevice->BeginScene()))  //1フレームに1回
+	if (g_pD3DDevice->BeginScene())  //1フレームに1回
 	{
 		//ポリゴン描画
 //		SetPolygonColor(D3DCOLOR_RGBA(255, 255, 255, 255));
@@ -318,8 +339,6 @@ void Draw(void)
 		DrawPolygon(400.f, 200.f, 32 * 2, 32 * 3, 32, 32);*/
 
 		//ランニングマン
-		SetPolygonTexture(TEXTURE_RUNNINGMAN);
-		SetPolygonScale(1.0f, 1.0f);
 
 		int patternNum = g_nAnimCount / 5 % 10;
 		int patternH = patternNum % 5;
@@ -328,7 +347,11 @@ void Draw(void)
 		int tcx = patternH * 140;
 		int tcy = patternH * 200;
 
-		DrawPolygon(600.f, 300.f,tcx,tcy, 140, 200);
+		SetPolygonTexture(TEXTURE_RUNNINGMAN);
+		SetPolygonScale(1.0f, 1.0f);
+		SetPolygonColor(D3DCOLOR_RGBA(255, 255, 255, 255));
+
+		DrawPolygon(100, 300, tcx, tcy, 140, 200);
 
 		g_pD3DDevice->EndScene();
 	}
@@ -336,7 +359,7 @@ void Draw(void)
 	g_pD3DDevice->Present(NULL, NULL, NULL, NULL);
 }
 
-LPDIRECT3DDEVICE9 GetD3DDevice(void)
+LPDIRECT3DDEVICE9	GetD3DDevice(void)
 {
 	return g_pD3DDevice;
 }
